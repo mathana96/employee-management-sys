@@ -48,14 +48,14 @@ public class ManagerTest
 	/**
 	 * Test method for Manager constructor using valid data
 	 */
-	// @Test
-	// public void testGettersValidData() {
-	// assertEquals("Padraig", manNormal1.getFirstName());
-	// assertEquals("Computing", manNormal1.getSecondName());
-	// assertEquals(12, manNormal1.getBonus(), 0.01);
-	// assertEquals(20, manNormal1.getHourlyRate(), 0.01);
-	// assertEquals(0, manNormal1.numberInDept());
-	// }
+	 @Test
+	 public void testGettersValidData() {
+	 assertEquals("Padraig", manNormal1.getFirstName());
+	 assertEquals("Computing", manNormal1.getSecondName());
+	 assertEquals(12, manNormal1.getBonus(), 0.01);
+	 assertEquals(20, manNormal1.getHourlyRate(), 0.01);
+	 assertEquals(0, manNormal1.numberInDept());
+	 }
 	//
 	// /**
 	// * Test method for Manager constructor using Invalid data

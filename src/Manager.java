@@ -3,13 +3,13 @@ import java.util.ArrayList;
 public class Manager extends Employee
 {
 	private double managerBonus;
-	// private ArrayList<Employee> staff;
+	private ArrayList<Employee> department;
 
 	public Manager(String firstName, String secondName, double hourlyRate, int employeeID)
 	{
 		super(firstName, secondName, hourlyRate, employeeID);
 		this.managerBonus = 12; // change to 0 for mtest
-
+		this.department = new ArrayList<Employee>();
 	}
 
 	public double getBonus()
@@ -36,6 +36,11 @@ public class Manager extends Employee
 		// }
 		// }
 
+	}
+
+	public Object numberInDept()
+	{
+		return this.department.size();
 	}
 
 	//
