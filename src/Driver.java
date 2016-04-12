@@ -31,29 +31,30 @@ public class Driver
 	{
 int option = mainMenu();
 		
-		while (option != 0)
-		{
-			switch(option)
-			{
-			case 1:
-				textPost();
-				break;
-				
-			case 2:
-				photoPost();	
-				break;
-				
-			case 3: 
-				System.out.println(newsFeed.show());
-				break;
-				
-			default:
-				System.out.println("Invalid option");
-			}
-			option = mainMenu();
-		}
-		System.out.println("Exiting");
-		System.exit(0);
-	
+//		while (option != 0)
+//		{
+//			switch(option)
+//			{
+//			case 1:
+//				textPost();
+//				break;
+//				
+//			case 2:
+//				photoPost();	
+//				break;
+//				
+//			case 3: 
+//				System.out.println(newsFeed.show());
+//				break;
+//				
+//			default:
+//				System.out.println("Invalid option");
+//			}
+//			option = mainMenu();
+//		}
+//		System.out.println("Exiting");
+//		System.exit(0);
+//	
+//	
 	}
 }

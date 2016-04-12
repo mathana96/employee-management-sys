@@ -2,25 +2,35 @@
 public class Employee
 {
 	private String firstName;
-	private String lastName;
+	private String secondName;
 	private double hourlyRate;
 	private int employeeID;
 	private int age;
 	
 	private final static double NORMAL_WORKWEEK = 37.5;
 	
-	public Employee(String firstName, String lastName, double hourlyRate, int employeeID)
+	public Employee(String firstName, String secondName, double hourlyRate, int employeeID)
 	{
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.secondName = secondName;
 		this.hourlyRate = hourlyRate;
 		this.employeeID = employeeID;
 	}
-	public Object getFirstName()
+	public String getFirstName()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return firstName;
 	}
-	
-	
+	public String getSecondName()
+	{
+		return secondName;
+	}
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+
+	public void setSecondName(String secondName)
+	{
+		this.secondName = secondName;
+	}
 }
