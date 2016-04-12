@@ -119,16 +119,16 @@ public class ManagerTest
 	// /**
 	// * Test method for getHourlyRate and setHourlyRate. (Validation on this field)
 	// */
-	// @Test
-	// public void testGetSetHourlyRate() {
-	// assertEquals(20, manNormal1.getHourlyRate(), 0.01);
-	// manNormal1.setHourlyRate(-1);
-	// assertEquals(20, manNormal1.getHourlyRate(), 0.01);
-	// manNormal1.setHourlyRate(0);
-	// assertEquals(0, manNormal1.getHourlyRate(), 0.01);
-	// manNormal1.setHourlyRate(20);
-	// assertEquals(20, manNormal1.getHourlyRate(), 0.01);
-	// }
+	 @Test
+	 public void testGetSetHourlyRate() {
+	 assertEquals(20, manNormal1.getHourlyRate(), 0.01);
+	 manNormal1.setHourlyRate(-1);
+	 assertEquals(20, manNormal1.getHourlyRate(), 0.01);
+	 manNormal1.setHourlyRate(0);
+	 assertEquals(0, manNormal1.getHourlyRate(), 0.01);
+	 manNormal1.setHourlyRate(20);
+	 assertEquals(20, manNormal1.getHourlyRate(), 0.01);
+	 }
 	//
 	// /**
 	// * Test method for calculateSalary()

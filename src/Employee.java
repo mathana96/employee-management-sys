@@ -33,4 +33,15 @@ public class Employee
 	{
 		this.secondName = secondName;
 	}
+	public double getHourlyRate()
+	{
+		return hourlyRate;
+	}
+	public void setHourlyRate(int newRate)
+	{
+		if (newRate >= 0)
+		{
+			this.hourlyRate = newRate;
+		}
+	}
 }
