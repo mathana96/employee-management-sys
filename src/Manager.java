@@ -8,14 +8,36 @@ public class Manager extends Employee
 	public Manager(String firstName, String secondName, double hourlyRate, int employeeID)
 	{
 		super(firstName, secondName, hourlyRate, employeeID);
-		this.managerBonus = 0;
+		this.managerBonus = 12; //change to 0 for mtest
  
 	}
 
-//	public double getBonus()
-//	{
-//		return 0;
-//	}
+  	public double getBonus()
+  	{
+  		return managerBonus;
+  	}
+
+		public void setBonus(int newBonus)
+		{
+			if (newBonus >= 0)
+			{
+				this.managerBonus = newBonus;
+			}
+			
+//			if (this.managerBonus == 0)
+//			{
+//				if (newBonus >= 0)
+//				{
+//					this.managerBonus = newBonus;
+//				}
+//				else 
+//				{
+//					this.managerBonus = 0;
+//				}
+//			}	
+			
+		}
+		
 //
 //	public double getHourlyRate()
 //	{
@@ -28,10 +50,7 @@ public class Manager extends Employee
 //	}
 //
 //
-//	public void setBonus(int i)
-//	{
-//		
-//	}
+
 //
 //	public void setHourlyRate(int i)
 //	{
