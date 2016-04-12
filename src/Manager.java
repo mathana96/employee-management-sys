@@ -5,10 +5,17 @@ public class Manager extends Employee
 	private double managerBonus;
 	private ArrayList<Employee> department;
 
-	public Manager(String firstName, String secondName, double hourlyRate, int employeeID)
+	public Manager(String firstName, String secondName, double hourlyRate, int managerBonus)
 	{
-		super(firstName, secondName, hourlyRate, employeeID);
-		this.managerBonus = 12; // change to 0 for mtest
+		super(firstName, secondName, hourlyRate);
+		if (managerBonus >= 0)
+		{
+			this.managerBonus = managerBonus;
+		}
+		else
+		{
+			this.managerBonus = 0;
+		}
 		this.department = new ArrayList<Employee>();
 	}
 

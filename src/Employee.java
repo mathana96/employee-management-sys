@@ -9,12 +9,19 @@ public class Employee
 	
 	private final static double NORMAL_WORKWEEK = 37.5;
 	
-	public Employee(String firstName, String secondName, double hourlyRate, int employeeID)
+	public Employee(String firstName, String secondName, double hourlyRate)
 	{
 		this.firstName = firstName;
 		this.secondName = secondName;
-		this.hourlyRate = hourlyRate;
-		this.employeeID = employeeID;
+		if (hourlyRate >=0)
+		{
+			this.hourlyRate = hourlyRate;
+		}
+		else
+		{
+			this.hourlyRate = 0;
+		}
+//		this.employeeID = employeeID;
 	}
 	public String getFirstName()
 	{

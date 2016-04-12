@@ -40,9 +40,9 @@ public class ManagerTest
 		// manNormal2.addDeptEmployee(temp1);
 		// manNormal2.addDeptEmployee(sales1);
 
-		// manValidation1 = new Manager ("Mary", "Contrary", -1, -1);
-		// manValidation2 = new Manager ("Mike", "Contrary", 0, 0);
-		// manValidation3 = new Manager ("Mark", "Contrary", 1, 1);
+		 manValidation1 = new Manager ("Mary", "Contrary", -1, -1);
+		 manValidation2 = new Manager ("Mike", "Contrary", 0, 0);
+		 manValidation3 = new Manager ("Mark", "Contrary", 1, 1);
 	}
 
 	/**
@@ -56,19 +56,19 @@ public class ManagerTest
 	 assertEquals(20, manNormal1.getHourlyRate(), 0.01);
 	 assertEquals(0, manNormal1.numberInDept());
 	 }
-	//
+	
 	// /**
 	// * Test method for Manager constructor using Invalid data
 	// */
-	// @Test
-	// public void testManagerInvalidData() {
-	// assertEquals(0, manValidation1.getBonus(), 0.01);
-	// assertEquals(0, manValidation1.getHourlyRate(), 0.01);
-	// assertEquals(0, manValidation2.getBonus(), 0.01);
-	// assertEquals(0, manValidation2.getHourlyRate(), 0.01);
-	// assertEquals(1, manValidation3.getBonus(), 0.01);
-	// assertEquals(1, manValidation3.getHourlyRate(), 0.01);
-	// }
+	 @Test
+	 public void testManagerInvalidData() {
+	 assertEquals(0, manValidation1.getBonus(), 0.01);
+	 assertEquals(0, manValidation1.getHourlyRate(), 0.01);
+	 assertEquals(0, manValidation2.getBonus(), 0.01);
+	 assertEquals(0, manValidation2.getHourlyRate(), 0.01);
+	 assertEquals(1, manValidation3.getBonus(), 0.01);
+	 assertEquals(1, manValidation3.getHourlyRate(), 0.01);
+	 }
 
 	/**
 	 * Test method for first name getter and setter (No validation on this field)
