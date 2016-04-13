@@ -133,20 +133,20 @@ public class ManagerTest
 	// /**
 	// * Test method for calculateSalary()
 	// */
-	// @Test
-	// public void testCalculateSalary() {
-	// // manager with no employees
-	// assertEquals(752.0, manNormal1.calculateSalary(37), 0.01);
-	// assertEquals(762.0, manNormal1.calculateSalary(37.5), 0.01);
-	// assertEquals(782.0, manNormal1.calculateSalary(38), 0.01);
-	// assertEquals(804.69, manNormal1.calculateSalary(38.5674), 0.01);
-	//
-	// //manager with employees
-	// assertEquals(3544.1, manNormal2.calculateSalary(37), 0.01);
-	// assertEquals(3591.75, manNormal2.calculateSalary(37.5), 0.01);
-	// assertEquals(3750.71, manNormal2.calculateSalary(38.334), 0.01);
-	// }
-	//
+	 @Test
+	 public void testCalculateSalary() {
+	 // manager with no employees
+	 assertEquals(752.0, manNormal1.calculateSalary(37), 0.01);
+	 assertEquals(762.0, manNormal1.calculateSalary(37.5), 0.01);
+	 assertEquals(782.0, manNormal1.calculateSalary(38), 0.01);
+	 assertEquals(804.69, manNormal1.calculateSalary(38.5674), 0.01);
+	
+	 //manager with employees
+	 assertEquals(3544.1, manNormal2.calculateSalary(37), 0.01);
+	 assertEquals(3591.75, manNormal2.calculateSalary(37.5), 0.01);
+	 assertEquals(3750.71, manNormal2.calculateSalary(38.334), 0.01);
+	 }
+	
 	// /**
 	// * Test method for addDeptEmployee(Employee).
 	// */

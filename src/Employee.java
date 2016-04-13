@@ -7,7 +7,7 @@ public class Employee
 	private int employeeID;
 	private int age;
 	
-	private final static double NORMAL_WORKWEEK = 37.5;
+	public final static double NORMAL_WORKWEEK = 37.5;
 	
 	public Employee(String firstName, String secondName, double hourlyRate)
 	{
@@ -51,4 +51,39 @@ public class Employee
 			this.hourlyRate = newRate;
 		}
 	}
+  public double calculateSalary(double numHours)
+	{
+  	if (numHours >= 0)
+  	{
+  		if (numHours <= NORMAL_WORKWEEK)
+  		{
+  			return ((getHourlyRate() * numHours) + calculateOvertime(numHours));
+  		}
+  		else
+  		{
+  			return ((getHourlyRate() * NORMAL_WORKWEEK) + calculateOvertime(numHours));
+  		}
+  	}
+  	else
+  	{
+  		return 0.0;
+  		
+  	}
+		 
+	}
+  
+  private double calculateOvertime (double numHours)
+  {
+  	
+  	if (numHours >= NORMAL_WORKWEEK)
+  	{	
+  		return ((numHours - NORMAL_WORKWEEK) * (2 * getHourlyRate()));
+  	}
+  	else
+  	{
+  		return 0.0;
+  	}
+
+  }
+
 }

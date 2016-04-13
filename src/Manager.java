@@ -49,24 +49,13 @@ public class Manager extends Employee
 	{
 		return this.department.size();
 	}
+	
+  public double calculateSalary(double numHours)
+	{
+  	return super.calculateSalary(numHours) + this.managerBonus;
+	}
 
-	//
 
-	//
-	// public Object numberInDept()
-	// {
-	// return null;
-	// }
-	//
-	//
-
-	//
-
-	//
-	// public double calculateSalary(double d)
-	// {
-	// return 0;
-	// }
 	//
 	// public void addDeptEmployee(Employee sales1)
 	// {
