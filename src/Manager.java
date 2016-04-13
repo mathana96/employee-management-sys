@@ -31,18 +31,6 @@ public class Manager extends Employee
 			this.managerBonus = newBonus;
 		}
 
-		// if (this.managerBonus == 0)
-		// {
-		// if (newBonus >= 0)
-		// {
-		// this.managerBonus = newBonus;
-		// }
-		// else
-		// {
-		// this.managerBonus = 0;
-		// }
-		// }
-
 	}
 
 	public Object numberInDept()
@@ -65,20 +53,20 @@ public class Manager extends Employee
   }
 
 
-	//
-	// public void addDeptEmployee(Employee sales1)
-	// {
-	//
-	// }
-	//
-	// public ArrayList<Employee> getDept()
-	// {
-	// return null;
-	// }
-	//
-	// public void setDept(ArrayList<Employee> tempDepartment)
-	// {
-	//
-	// }
+	
+  public void addDeptEmployee(Employee employee)
+	{
+  	department.add(employee);
+	}
+	
+	public ArrayList<Employee> getDept()
+  {
+	  return department;
+	}
+	
+	public void setDept(ArrayList<Employee> newDepartment)
+	{
+		this.department = newDepartment;
+	}
 
 }

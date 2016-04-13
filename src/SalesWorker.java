@@ -43,12 +43,12 @@ public class SalesWorker extends Employee
 		return this.salesBonus;
 	}
   
-  public String employeeDetails()
+  public String toString()
   {
-		return "\n===============================\nPostion: Manager\n" + 
+		return "\n===============================\nPostion: Sales Worker\n" + 
 					 super.toString() + 
 					 "\nSales bonus: " + 
-					 salesBonus +
+					 (salesBonus *100.0) + "%" +
 					 "\n===============================\n";
   }
 
