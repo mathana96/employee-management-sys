@@ -55,9 +55,13 @@ public class Manager extends Employee
   	return super.calculateSalary(numHours) + this.managerBonus;
 	}
   
-  public String employeeDetails()
+  public String toString() 
   {
-		return "\n===============================\nPostion: Manager" + super.employeeDetails() + "\nManager bonus: " + managerBonus;
+		return "\n===============================\nPostion: Manager\n" + 
+					 super.toString() + 
+					 "\nManager bonus: " + 
+					 managerBonus +
+					 "\n===============================\n";
   }
 
 

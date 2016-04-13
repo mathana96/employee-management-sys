@@ -86,13 +86,12 @@ public class Employee
 
   }
   
-  public String employeeDetails()
+  public String toString() 
   {
 		String list = "";
 		list += ("\nFirst name: " + getFirstName() + 
 						 "\nSecond name: " + getSecondName() +
 						 "\nHourly rate: " + getHourlyRate());
-		list += "\n===============================\n";
 		return list;
   }
 

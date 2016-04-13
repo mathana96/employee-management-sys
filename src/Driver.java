@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Driver
 {
 	private Scanner	input;
-	private ArrayList<Employee>	employees;
+	private List<Employee> employees;
 
 	public static void main(String[] args)
 	{
@@ -79,9 +81,10 @@ public class Driver
 	public String listAll()
 	{
 		String list = "";
+		
 		for (Employee employee : employees)
 		{
-			list += employee.employeeDetails(); 				
+			list += employee.toString(); 	
 		}
 		return list;
 	}
