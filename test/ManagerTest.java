@@ -150,16 +150,16 @@ public class ManagerTest
 	// /**
 	// * Test method for addDeptEmployee(Employee).
 	// */
-	// @Test
-	// public void testAddDeptEmployee() {
-	// //empty and add one employee
-	// assertEquals(0, manNormal1.numberInDept());
-	// manNormal1.addDeptEmployee(sales1);
-	// assertEquals(1, manNormal1.numberInDept());
-	// assertEquals("Selly", manNormal1.getDept().get(0).getFirstName());
-	// }
-	//
-	//
+//	 @Test
+//	 public void testAddDeptEmployee() {
+//	 //empty and add one employee
+//	 assertEquals(0, manNormal1.numberInDept());
+//	 manNormal1.addDeptEmployee(sales1);
+//	 assertEquals(1, manNormal1.numberInDept());
+//	 assertEquals("Selly", manNormal1.getDept().get(0).getFirstName());
+//	 }
+	
+	
 	// /**
 	// * Test method for dept getters and setters.
 	// */

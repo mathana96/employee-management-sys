@@ -5,7 +5,7 @@ public class Manager extends Employee
 	private double managerBonus;
 	private ArrayList<Employee> department;
 
-	public Manager(String firstName, String secondName, double hourlyRate, int managerBonus)
+	public Manager(String firstName, String secondName, double hourlyRate, double managerBonus)
 	{
 		super(firstName, secondName, hourlyRate);
 		if (managerBonus >= 0)
@@ -54,6 +54,11 @@ public class Manager extends Employee
 	{
   	return super.calculateSalary(numHours) + this.managerBonus;
 	}
+  
+  public String employeeDetails()
+  {
+		return "\n===============================\nPostion: Manager" + super.employeeDetails() + "\nManager bonus: " + managerBonus;
+  }
 
 
 	//

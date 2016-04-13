@@ -85,5 +85,15 @@ public class Employee
   	}
 
   }
+  
+  public String employeeDetails()
+  {
+		String list = "";
+		list += ("\nFirst name: " + getFirstName() + 
+						 "\nSecond name: " + getSecondName() +
+						 "\nHourly rate: " + getHourlyRate());
+		list += "\n===============================\n";
+		return list;
+  }
 
 }
