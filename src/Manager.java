@@ -46,11 +46,12 @@ public class Manager extends Employee
   
   public String toString() 
   {
-		return "\n===============================\nPostion: Manager\n" + 
+		return "\nPostion: Manager\n" + 
 					 super.toString() + 
 					 "\nManager bonus: " + 
 					 managerBonus +
-					 "\n===============================\n";
+					 "\nEmployees in department: " +
+					 department.size();
   }
   public void addDeptEmployee(Employee employee)
 	{

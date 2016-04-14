@@ -42,11 +42,10 @@ public class SalesWorker extends Employee
   
   public String toString()
   {
-		return "\n===============================\nPostion: Sales Worker\n" + 
+		return "\nPostion: Sales Worker\n" + 
 					 super.toString() + 
 					 "\nSales bonus: " + 
-					 salesBonus + "%" +
-					 "\n===============================\n";
+					 salesBonus + "%";
   }
 
 }

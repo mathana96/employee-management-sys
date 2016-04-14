@@ -13,8 +13,7 @@ public class TempWorker extends Employee
   
   public String toString() 
   {
-		return "\n===============================\nPostion: Temporary Worker\n" + 
-					 super.toString() + 
-					 "\n===============================\n";
+		return "\nPostion: Temporary Worker\n" + 
+					 super.toString();
   }
 }

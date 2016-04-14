@@ -4,8 +4,6 @@ public abstract class Employee
 	private String firstName;
 	private String secondName;
 	private double hourlyRate;
-	private int employeeID;
-	private int age;
 	
 	public final static double NORMAL_WORKWEEK = 37.5;
 	
