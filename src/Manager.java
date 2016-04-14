@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Manager extends Employee
 {
 	private double managerBonus;
-	private ArrayList<Employee> department;
+	private List<Employee> department;
 
 	public Manager(String firstName, String secondName, double hourlyRate, double managerBonus)
 	{
@@ -33,7 +34,7 @@ public class Manager extends Employee
 
 	}
 
-	public Object numberInDept()
+	public int numberInDept()
 	{
 		return this.department.size();
 	}
@@ -51,15 +52,12 @@ public class Manager extends Employee
 					 managerBonus +
 					 "\n===============================\n";
   }
-
-
-	
   public void addDeptEmployee(Employee employee)
 	{
   	department.add(employee);
 	}
 	
-	public ArrayList<Employee> getDept()
+	public List<Employee> getDept()
   {
 	  return department;
 	}
