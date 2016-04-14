@@ -91,7 +91,7 @@ public class Driver
 		System.out.println("Hourly rate: ");
 		double hourlyRate = input.nextDouble();
 
-		System.out.println("Sales bonus percentage (eg. 10): \nSet as 0 if worker does not qualify");
+		System.out.println("Sales bonus percentage (eg. 10): \n -Set as 0 if worker does not qualify.\n -Maximum of 20.");
 		double bonus = input.nextDouble();
 
 		employees.add(new SalesWorker(firstName, secondName, hourlyRate, bonus));

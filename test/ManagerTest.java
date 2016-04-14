@@ -49,7 +49,7 @@ public class ManagerTest {
 	public void testGettersValidData() {
 		assertEquals("Padraig", manNormal1.getFirstName());
 		assertEquals("Computing", manNormal1.getSecondName());
-        assertEquals(12, manNormal1.getBonus(), 0.01);
+		assertEquals(12, manNormal1.getBonus(), 0.01);
 		assertEquals(20, manNormal1.getHourlyRate(), 0.01);	
 		assertEquals(0, manNormal1.numberInDept());
 	}

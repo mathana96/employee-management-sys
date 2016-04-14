@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class SalesWorker extends Employee
 {
 
@@ -11,7 +9,7 @@ public class SalesWorker extends Employee
 
 		if (salesBonus >= 0 && salesBonus <= 20)
 		{
-			this.salesBonus = (salesBonus/100.0);
+			this.salesBonus = salesBonus;
 		}
 		else
 		{
@@ -28,7 +26,7 @@ public class SalesWorker extends Employee
 	{
 		if (newBonus >= 0 && newBonus <= 20)
 		{
-			this.salesBonus = (newBonus/100.0);
+			this.salesBonus = newBonus;
 		}
 	}
 	
@@ -39,8 +37,7 @@ public class SalesWorker extends Employee
 	
 	public double calculateBonus(double numHours)
 	{
-		this.salesBonus = (this.salesBonus * super.calculateSalary(numHours));
-		return this.salesBonus;
+		return ((this.salesBonus/100.0) * super.calculateSalary(numHours));
 	}
   
   public String toString()
@@ -48,7 +45,7 @@ public class SalesWorker extends Employee
 		return "\n===============================\nPostion: Sales Worker\n" + 
 					 super.toString() + 
 					 "\nSales bonus: " + 
-					 (salesBonus *100.0) + "%" +
+					 salesBonus + "%" +
 					 "\n===============================\n";
   }
 
