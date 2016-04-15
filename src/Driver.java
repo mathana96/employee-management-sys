@@ -7,7 +7,6 @@ public class Driver
 {
 	private Scanner	input;
 	private List<Employee> employees;
-	private List<Employee> managers; 
 
 	public static void main(String[] args)
 	{
@@ -19,7 +18,6 @@ public class Driver
 	{
 		input = new Scanner(System.in);
 		employees = new ArrayList<Employee>();
-		managers = new ArrayList<Employee>();
 	}
 
 	public int mainMenu()
@@ -62,7 +60,7 @@ public class Driver
 			switch (option)
 			{
 			case 1:
-				chooseWorker();
+				workerRun();
 				break;
 
 			case 2:
@@ -73,10 +71,9 @@ public class Driver
 				addToDept();
 				break;
 
-			//
-			// case 3:
-			// System.out.println(newsFeed.show());
-			// break;
+			case 4:
+				salaryRun();
+				break;
 
 			default:
 				System.out.println("Invalid option. Please try again.");
@@ -113,7 +110,7 @@ public class Driver
 		return option;		
 	}
 	
-	public void chooseWorker() 
+	public void workerRun() 
 	{
 		int option = workerMenu();
 
@@ -364,7 +361,7 @@ public class Driver
 		String list = "";
 		int i = 0;
 		list += "\n============= EMPLOYEE LIST =============\n";
-		if (employees.size() > 0)
+		if (!employees.isEmpty())
 		{
 			for (Employee employee : employees)
 			{
@@ -376,7 +373,7 @@ public class Driver
 		}
 		else
 		{
-			list += "\nNo employees\n";
+			list += "\nNo employees found\n";
 		}
 		return list;
 	}	
@@ -403,4 +400,113 @@ public class Driver
 		return list;
 		}
 
+	public int salaryMenu()
+	{
+		int option = 0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("\n============= SALARY MENU =============\n");
+				System.out.println("1)	Salary of all employees");
+				System.out.println("2)	Salary of all Managers");
+				System.out.println("3)	Salary of all Sales Workers");
+				System.out.println("4)	Salary of all Temporary Workers");
+				System.out.println("5)	Salary of individual employee");
+				System.out.println("\n0)	Back to main menu");
+				option = input.nextInt();
+				errorFree = true;
+				
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+			
+		}
+		
+		System.out.println(option);
+		return option;	
+	}
+	
+	public void salaryRun()
+	{
+		if (!employees.isEmpty())
+		{
+			int option = salaryMenu();
+
+			while (option != 0)
+			{
+				switch (option)
+				{
+				case 1:
+					System.out.println(allSalary());
+					option = 0;
+					break;
+
+//				case 2:
+//					addSalesWorker();
+//					option = 0;
+//					break;	
+//					
+//				case 3:
+//					addTempWorker();
+//					option = 0;
+//					break;
+
+				default:
+					System.out.println("Invalid option. Please try again.\n");
+					option = salaryMenu();
+				}		
+			}
+		}
+		else
+		{
+			System.out.println("\nNo employees found\n");
+		}
+		
+	}
+	
+	public String allSalary()
+	{
+		String salary = "";
+		int i = 0;
+		double numHours = 0.0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		salary += "\n============= SALARY OF ALL EMPLOYEES =============\n";
+		for(Employee employee: employees)
+		{
+			salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
+			
+			if (employee instanceof Manager)
+			{
+				salary += "\nManager bonus: " + ((Manager) employee).getBonus();
+			}
+			else if (employee instanceof SalesWorker)
+			{
+				salary += "\nSales bonus percentage: " + ((SalesWorker) employee).getBonus();
+			}
+			salary += "\n\nSalary: " + employee.calculateSalary(numHours);	
+			salary += "\n===============================";
+			i++;
+		}
+		return salary;
+	}
+	
 }
