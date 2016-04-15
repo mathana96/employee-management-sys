@@ -53,19 +53,20 @@ public class Manager extends Employee
 					 "\nEmployees in department: " +
 					 department.size();
   }
-  public void addDeptEmployee(Employee employee)
+  void addDeptEmployee(Employee employee)
 	{
+ 
   	department.add(employee);
-	}
-	
-	public List<Employee> getDept()
-  {
-	  return department;
 	}
 	
 	public void setDept(ArrayList<Employee> newDepartment)
 	{
 		this.department = newDepartment;
+	}
+	
+	public List<Employee> getDept()
+  {
+	  return department;
 	}
 
 }

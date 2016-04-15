@@ -272,22 +272,30 @@ public class Driver
 	public void addToDept()
 	{
 		System.out.println(listAll());
+		System.out.println("Please select employee (Employee ID)");
+		int selectedEmployee = input.nextInt() - 1;
 		
-		input.nextLine();
-		System.out.println("Please select the employee (worker ID)  you wish to assign");
-		int employeeSelected = input.nextInt();
+		Employee employee = employees.get(selectedEmployee);
 		
+		boolean isManager = false;
 		
-		Employee employee = employees.get(employeeSelected-1);
-		
-		listManagers();
-		System.out.println("Please select the manager (worker ID) whose department you wish to assign an employee to");
-		int managerSelected = input.nextInt();
-		
-		Manager manager = (Manager) employees.get(managerSelected-1);
-
-		manager.addDeptEmployee(employee);
-
+		while (!isManager)
+		{
+			input.nextLine();
+			System.out.println(listManagers());
+			System.out.println("Please select the manager whose department you wish to assign the employee to");
+			
+			int selectedManager = input.nextInt() - 1;
+			Employee emp = employees.get(selectedManager);
+			
+			if (emp.getClass().equals(Manager.class))
+			{
+				Manager man = (Manager) employees.get(selectedManager);
+				man.addDeptEmployee(employee);
+				isManager = true;
+			}
+			
+		}
 	}
 
 	public String listAll() 

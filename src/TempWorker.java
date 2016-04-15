@@ -16,4 +16,9 @@ public class TempWorker extends Employee
 		return "\nPostion: Temporary Worker\n" + 
 					 super.toString();
   }
+
+/*	void addDeptEmployee(Employee employee)
+	{
+		// TODO Auto-generated method stub
+	}*/
 }
