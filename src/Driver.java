@@ -274,7 +274,15 @@ public class Driver
 
 	public void addToDept()
 	{
-		if (!listManagers().isEmpty())
+		int present = 0;
+		for (Employee employee: employees)
+		{
+			if ((employee instanceof Manager))
+			{
+				present++;
+			}
+		}
+		if (employees.size() > present)
 		{
     		System.out.println(listAll());
     		int selectedEmployee = 0;
@@ -284,7 +292,7 @@ public class Driver
     		{
     			try
     			{
-        		System.out.println("Please select employee (Employee ID): ");
+        		System.out.println("Please select employee to be assigned (Employee ID): ");
         		selectedEmployee = input.nextInt() - 1;
         		if (selectedEmployee < employees.size())
         		{
@@ -345,8 +353,11 @@ public class Driver
     			if (emp.getClass().equals(Manager.class))
     			{
     				Manager man = (Manager) employees.get(selectedManager);
+    				
     				man.addDeptEmployee(employee);
     				isManager = true;
+
+
     			}
     			else
     			{
@@ -357,7 +368,7 @@ public class Driver
 		}
 		else
 		{
-			System.out.println("\nExisting managers not found. At least 1 manager required to add employee to department\n");
+			System.out.println("\nError. Either;\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
 		}
 	}
 

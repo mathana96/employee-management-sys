@@ -39,6 +39,17 @@ public class Manager extends Employee
 		return this.department.size();
 	}
 	
+	public String employeesInDept()
+	{
+		String str = "";
+
+		for (int i=0; i<department.size(); i++)
+		{
+			str += "\n				- " + department.get(i).getFirstName() + " " + department.get(i).getSecondName();		
+		}
+		return str;
+	}
+	
   public double calculateSalary(double numHours)
 	{
   	return super.calculateSalary(numHours) + this.managerBonus;
@@ -51,7 +62,9 @@ public class Manager extends Employee
 					 "\nManager bonus: " + 
 					 managerBonus +
 					 "\nEmployees in department: " +
-					 department.size();
+					 department.size() +
+					 employeesInDept();
+	
   }
   void addDeptEmployee(Employee employee)
 	{
