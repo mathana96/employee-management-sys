@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 
 /**
- * @author Siobhan Drohan, Mairead Meagher & Mathana Nair Sreedaran, 
+ * @author Siobhan Drohan, Mairead Meagher & Mathana Nair Sreedaran
  */
 
 public class SalesWorkerTest
@@ -20,6 +20,10 @@ public class SalesWorkerTest
 	private SalesWorker sales1;
 	private SalesWorker salesValidation1, salesValidation2, salesValidation3, salesValidation4;
 
+	/**
+	 * Method to set up data for testing. 
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
@@ -31,6 +35,9 @@ public class SalesWorkerTest
 		salesValidation4 = new SalesWorker("Mark", "Contrary", 1, 25);
 	}
 
+	/**
+	 * Test method for SalesWorker constructor using valid data
+	 */
 	@Test
 	public void testGettersValidData()
 	{
@@ -41,6 +48,9 @@ public class SalesWorkerTest
 
 	}
 
+	/**
+	 * Test method for SalesWorker constructor using Invalid data
+	 */
 	@Test
 	public void testManagerInvalidData()
 	{
@@ -58,6 +68,9 @@ public class SalesWorkerTest
 		
 	}
 	
+	/**
+	 * Test method for first name getter and setter (No validation on this field)
+	 */
 	@Test
 	public void testGetSetFirstName() 
 	{
@@ -66,6 +79,9 @@ public class SalesWorkerTest
 		assertEquals(sales1.getFirstName(),"Selling");
 	}
 	
+	/**
+	 * Test method for second name getter and setter. (No validation on this field)
+	 */
 	@Test
 	public void testGetSetSecondName() 
 	{
@@ -74,6 +90,24 @@ public class SalesWorkerTest
 		assertEquals(sales1.getSecondName(),"Sold");
 	}
 	
+	/**
+	 * Test method for getHourlyRate and setHourlyRate. (Validation on this field)
+	 */
+	@Test
+	public void testGetSetHourlyRate() 
+	{
+		assertEquals(12, sales1.getHourlyRate(), 0.01);
+		sales1.setHourlyRate(-1);
+		assertEquals(12, sales1.getHourlyRate(), 0.01);
+		sales1.setHourlyRate(0);
+		assertEquals(0, sales1.getHourlyRate(), 0.01);
+		sales1.setHourlyRate(20);
+		assertEquals(20, sales1.getHourlyRate(), 0.01);
+	}
+	
+	/**
+	 * Test method for getBonus and setBonus. (Validation on this field)
+	 */
 	@Test
 	public void testGetSetBonus() 
 	{
@@ -88,6 +122,10 @@ public class SalesWorkerTest
 		assertEquals(12, sales1.getBonus(), 0.01);
 	}
 	
+
+	/**
+	 * Test method for calculateBonus()
+	 */
 	@Test
 	public void testCalculateBonus() 
 	{
@@ -97,6 +135,9 @@ public class SalesWorkerTest
 		assertEquals(71.34, sales1.calculateBonus(38.5674), 0.01);
 	}
 	
+	/**
+	 * Test method for calculateSalary()
+	 */
 	@Test
 	public void testCalculateSalary() 
 	{

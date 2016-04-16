@@ -1,18 +1,31 @@
 import java.util.List;
 
+/**
+ * This abstract class acts as a superclass storing generic
+ * information about an employee.
+ * 
+ * @author Mathana Nair Sreedaran
+ *
+ */
 public abstract class Employee
 {
-	private String firstName;
-	private String secondName;
-	private double hourlyRate;
+	private String firstName; //Stores first name
+	private String secondName; //Stores second name
+	private double hourlyRate; //Stores hourly rate earned
 	
-	public final static double NORMAL_WORKWEEK = 37.5;
+	public final static double NORMAL_WORKWEEK = 37.5;  //The number of hours in a normal workweek
 	
+	/**
+	 * Constructor for Employee class
+	 * @param firstName				First name of employee
+	 * @param secondName			Second name of employee
+	 * @param hourlyRate			Hourly rate of employee
+	 */
 	public Employee(String firstName, String secondName, double hourlyRate)
 	{
 		this.firstName = firstName;
 		this.secondName = secondName;
-		if (hourlyRate >=0)
+		if (hourlyRate >=0) //Validation for hourly rate
 		{
 			this.hourlyRate = hourlyRate;
 		}
@@ -22,6 +35,70 @@ public abstract class Employee
 		}
 //		this.employeeID = employeeID;
 	}
+	
+
+	/**
+	 * Returns the salary of an employee including overtime and
+	 * bonus if applicable for the specified number of hours worked
+	 * 
+	 * @param numHours			Number of hours worked by employee
+	 * @return							Salary of employee (with overtime and bonus if applicable) 
+	 */
+  public double calculateSalary(double numHours)
+	{
+  	if (numHours >= 0)
+  	{
+  		if (numHours <= NORMAL_WORKWEEK)
+  		{
+  			return ((getHourlyRate() * numHours)); //Less than standard hours
+  		}
+  		else
+  		{
+  			return ((getHourlyRate() * NORMAL_WORKWEEK) + calculateOvertime(numHours)); //Maximum standard rate
+  		}
+  	}
+  	else
+  	{
+  		return 0.0;
+  		
+  	}
+		 
+	}
+  
+  /**
+   * Returns overtime of employee
+   * @param numHours    Hours worked
+   * @return						Overtime
+   */
+  private double calculateOvertime (double numHours)
+  {
+  	
+  	if (numHours >= NORMAL_WORKWEEK)
+  	{	
+  		return ((numHours - NORMAL_WORKWEEK) * (2 * getHourlyRate())); //Overtime calculated with double of standard rate
+  	}
+  	else
+  	{
+  		return 0.0;
+  	}
+
+  }
+  
+  /**
+   * Create a String with the generic employee details
+   */
+  public String toString() 
+  {
+		String list = "";
+		list += ("\nFirst name: " + getFirstName() + 
+						 "\nSecond name: " + getSecondName() +
+						 "\nHourly rate: " + getHourlyRate());
+		return list;
+  }
+  
+	/**
+	 * Setters and getters
+	 */
 	public String getFirstName()
 	{
 		return firstName;
@@ -50,49 +127,6 @@ public abstract class Employee
 			this.hourlyRate = newRate;
 		}
 	}
-  public double calculateSalary(double numHours)
-	{
-  	if (numHours >= 0)
-  	{
-  		if (numHours <= NORMAL_WORKWEEK)
-  		{
-  			return ((getHourlyRate() * numHours) + calculateOvertime(numHours));
-  		}
-  		else
-  		{
-  			return ((getHourlyRate() * NORMAL_WORKWEEK) + calculateOvertime(numHours));
-  		}
-  	}
-  	else
-  	{
-  		return 0.0;
-  		
-  	}
-		 
-	}
-  
-  private double calculateOvertime (double numHours)
-  {
-  	
-  	if (numHours >= NORMAL_WORKWEEK)
-  	{	
-  		return ((numHours - NORMAL_WORKWEEK) * (2 * getHourlyRate()));
-  	}
-  	else
-  	{
-  		return 0.0;
-  	}
-
-  }
-  
-  public String toString() 
-  {
-		String list = "";
-		list += ("\nFirst name: " + getFirstName() + 
-						 "\nSecond name: " + getSecondName() +
-						 "\nHourly rate: " + getHourlyRate());
-		return list;
-  }
-  
+	
  
 }

@@ -1,13 +1,28 @@
+/**
+ * This class stores information specific to employees 
+ * of type SalesWorker which includes a sales performance bonus
+ * 
+ * @author Mathana Nair Sreedaran
+ *
+ */
 public class SalesWorker extends Employee
 {
 
-	private double salesBonus;
+	private double salesBonus; //Stores the sales performance  bonus
 	
+	/**
+	 * Constructor for objects of class Manager
+	 * 
+	 * @param firstName		First name of a sales worker
+	 * @param secondName	Second name of a sales worker
+	 * @param hourlyRate  Hourly rate of a sales worker
+	 * @param salesBonus  Sales performance bonus 
+	 */
 	public SalesWorker(String firstName, String secondName, double hourlyRate, double salesBonus)
 	{
 		super(firstName, secondName, hourlyRate);
 
-		if (salesBonus >= 0 && salesBonus <= 20)
+		if (salesBonus >= 0 && salesBonus <= 20) //Validation for sales performance bonus
 		{
 			this.salesBonus = salesBonus;
 		}
@@ -17,6 +32,37 @@ public class SalesWorker extends Employee
 		}
 	}
 
+	/**
+	 * Calculates and returns  salary of sales worker with bonus
+	 */
+	public double calculateSalary(double numHours)
+	{
+  	return super.calculateSalary(numHours) + calculateBonus(numHours);
+	}
+	
+	/**
+	 * Calculates and returns bonus of sales worker 
+	 */
+	public double calculateBonus(double numHours)
+	{
+		return ((this.salesBonus/100.0) * super.calculateSalary(numHours));
+	}
+  
+	/**
+   * Returns a String of the sales worker's details and position
+   */
+  public String toString()
+  {
+		return "\nPostion: Sales Worker\n" + 
+					 super.toString() + 
+					 "\nSales bonus: " + 
+					 salesBonus + "%";
+  }
+  
+
+	/**
+	 * Setters and getters
+	 */
 	public double getBonus()
 	{
 		return salesBonus;
@@ -29,23 +75,5 @@ public class SalesWorker extends Employee
 			this.salesBonus = newBonus;
 		}
 	}
-	
-	public double calculateSalary(double numHours)
-	{
-  	return super.calculateSalary(numHours) + calculateBonus(numHours);
-	}
-	
-	public double calculateBonus(double numHours)
-	{
-		return ((this.salesBonus/100.0) * super.calculateSalary(numHours));
-	}
-  
-  public String toString()
-  {
-		return "\nPostion: Sales Worker\n" + 
-					 super.toString() + 
-					 "\nSales bonus: " + 
-					 salesBonus + "%";
-  }
 
 }

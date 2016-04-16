@@ -1,25 +1,45 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * This class handles the input of the user with the system performing 
+ * the necessary actions to produce the desired output using a menu system.
+ * This class has an ArrayList of all the employees created.
+ * 
+ * @author Mathana Nair Sreedaran
+ */
 
 public class Driver
 {
 	private Scanner	input;
 	private List<Employee> employees;
 
+	/**
+	 * Main method initialising the menu system.
+	 */
 	public static void main(String[] args)
 	{
 		Driver driver = new Driver();
 		driver.run();
 	}
 
+	/**
+	 * Constructor for Driver initialising the Scanner
+	 * utility and ArrayList of employees which stores
+	 * objects of type Employee.
+	 */
 	public Driver()
 	{
 		input = new Scanner(System.in);
 		employees = new ArrayList<Employee>();
 	}
 
+	/**
+	 * Presents the user with the main menu of the system
+	 * and returns their selection.
+	 * @return The user's menu selection
+	 */
 	public int mainMenu()
 	{
 		
@@ -52,6 +72,11 @@ public class Driver
 		return option;
 	}	
 
+	/**
+	 * Handles the user's selection from the main menu 
+	 * by calling methods corresponding to the user's
+	 * selection.
+	 */
 	public void run()
 	{
 		int option = mainMenu();
@@ -89,6 +114,11 @@ public class Driver
 		System.exit(0);
 	}
 	
+	/**
+	 * Presents the user with a sub menu of the system called the worker menu
+	 * and returns their selection.
+	 * @return				The user's menu selection
+	 */
 	public int workerMenu()
 	{
 		int option = 0;
@@ -115,6 +145,11 @@ public class Driver
 		return option;		
 	}
 	
+	/**
+	 * Handles the user's selection from the worker menu 
+	 * by calling methods corresponding to the user's
+	 * selection.
+	 */
 	public void workerRun() 
 	{
 		int option = workerMenu();
@@ -145,6 +180,9 @@ public class Driver
 		}
 	}
 
+	/**
+	 * Adds an employee of type Manager to the ArrayList "employees".
+	 */
 	public void addManager()
 	{
 	
@@ -194,6 +232,9 @@ public class Driver
 
 	}
 	
+	/**
+	 * Adds an employee of type SalesWorker to the ArrayList "employees".
+	 */
 	public void addSalesWorker() 
 	{
 		input.nextLine();
@@ -242,6 +283,9 @@ public class Driver
 
 	}
 	
+	/**
+	 * Adds an employee of type TempWorker to the ArrayList "employees".
+	 */
 	public void addTempWorker() 
 	{
 		input.nextLine();
@@ -272,9 +316,14 @@ public class Driver
 
 	}
 
+	/**
+	 * Adds an employee of either type SalesWorker or TempWorker
+	 *  to the department of a particular Manager.
+	 */
 	public void addToDept()
 	{
 		int present = 0;
+		//Check if employee of type Manager is present in the employees ArrayList
 		for (Employee employee: employees)
 		{
 			if ((employee instanceof Manager))
@@ -282,122 +331,130 @@ public class Driver
 				present++;
 			}
 		}
+		
+		//Execute if the total number of employees are more than the number of Managers
 		if (employees.size() > present)
 		{
-    		System.out.println(listAll());
-    		int selectedEmployee = 0;
-    		int selectedManager = 0;
-    		boolean errorFree = false;
-    		while (!errorFree)
-    		{
-    			try
-    			{
-        		System.out.println("Please select employee (Either Sales Worker or Temp Employee) to be assigned (Employee ID): ");
-        		selectedEmployee = input.nextInt() - 1;
-        		if (selectedEmployee < employees.size())
-        		{
-        			
-        			if (employees.get(selectedEmployee).getClass().equals(Manager.class))
-        			{
-        				System.out.println("Cannot add Manager to department. Please try again.\n");
-        			}
-        			else
-        			{
-        				errorFree = true;
-        			}
-        		}	
-        		else
-        		{
-        			System.out.println("Invalid option. Please try again. ");
-        		}
-    			}	
-    			catch (Exception e)
-    			{
-    				input.nextLine();
-    				System.out.println("\nOnly numeric values accepted. Please try again.\n");
-    			}
-    			
-    		}		
-    		Employee employee = employees.get(selectedEmployee);
-    		
-    	
-    		boolean isManager = false;
-    		
-    		while (!isManager)
-    		{		
-    			errorFree = false;
-    			while (!errorFree)
-    			{
-    							
-    				try
-    				{
-        			input.nextLine();
-        			System.out.println("\n============= MANAGER LIST =============");
-        			System.out.println(listManagers());
-        			System.out.println("Please select the manager whose department you wish to assign the employee to: ");
-        		  selectedManager = input.nextInt() - 1;
-        		  if (selectedManager < employees.size())
-          		{
-          			errorFree = true;
-          		}	
-          		else
-          		{
-          			System.out.println("Invalid option. Please try again. ");
-          		}
-    				}
-    				catch (Exception e)
-    				{
-    					System.out.println("\nOnly numeric values accepted. Please try again.\n");
-    				}
-    				   				
-    			}
-    			
-    			Employee manager = employees.get(selectedManager);
-    			
-    			if (manager.getClass().equals(Manager.class))
-    			{
-    				Manager man = (Manager) employees.get(selectedManager);
-    				
-    				
-    				int added = 0;
-    				for (Employee staff: man.getDept())
-    				{
-    					if ((employee.getFirstName() == staff.getFirstName()) && (employee.getSecondName() == staff.getSecondName()))
-    					{
-    						added++;
-    					}					
-    				}
-    				
-    				if (added == 0)
-    				{
-    					man.addDeptEmployee(employee);
-    					System.out.println("\nEmployee successfully added to department\n");
-    				}
-    				else
-    				{
-    					input.nextLine();
-    					System.out.println("Employee already added to department. Please try again. ");
-    				}
-    				isManager = true;
-    			}
-    			else
-    			{
-//    				input.nextLine();
-    				System.out.println("Invalid option. Please try again. ");
-    			}
-    			    			
-    		}
+			//Lists all the employees 
+			System.out.println(listAll());
+			int selectedEmployee = 0;
+			int selectedManager = 0;
+			boolean errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+					System.out.println("Please select employee (Either Sales Worker or Temp Employee) to be assigned (Employee ID): ");
+					selectedEmployee = input.nextInt() - 1;
+					if (selectedEmployee < employees.size())
+					{
+
+						if (employees.get(selectedEmployee).getClass().equals(Manager.class))
+						{
+							System.out.println("Cannot add Manager to department. Please try again.\n");
+						}
+						else
+						{
+							errorFree = true;
+						}
+					}	
+					else
+					{
+						System.out.println("Invalid option. Please try again. ");
+					}
+				}	
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
+
+			}		
+			//Create an object of the selected employee from the ArrayList
+			Employee employee = employees.get(selectedEmployee);
+
+
+			boolean isManager = false;
+
+			while (!isManager)
+			{		
+				errorFree = false;
+				while (!errorFree)
+				{
+					//Lists all managers
+					try
+					{
+						input.nextLine();
+						System.out.println("\n============= MANAGER LIST =============");
+						System.out.println(listManagers());
+						System.out.println("Please select the manager whose department you wish to assign the employee to: ");
+						selectedManager = input.nextInt() - 1;
+						//Catches Outofboundsexception
+						if (selectedManager < employees.size())
+						{
+							errorFree = true;
+						}	
+						else
+						{
+							System.out.println("Invalid option. Please try again. ");
+						}
+					}
+					catch (Exception e)
+					{
+						System.out.println("\nOnly numeric values accepted. Please try again.\n");
+					}
+
+				}
+				
+				//Creates an object of the selected Manager
+				Employee manager = employees.get(selectedManager);
+				
+				//Checks if the selected employee is indeed of type Manager
+				if (manager.getClass().equals(Manager.class))
+				{
+					Manager man = (Manager) employees.get(selectedManager);
+					//Checks if the employee selected initially is present in the selected Manager's department
+					int added = 0;
+					for (Employee staff: man.getDept())
+					{
+						if ((employee.getFirstName() == staff.getFirstName()) && (employee.getSecondName() == staff.getSecondName()))
+						{
+							added++;
+						}					
+					}
+					//Execute if employee is not in the manager's department
+					if (added == 0)
+					{
+						man.addDeptEmployee(employee);
+						System.out.println("\nEmployee successfully added to department\n");
+					}
+					else
+					{
+						input.nextLine();
+						System.out.println("Employee already added to department. Please try again. ");
+					}
+					isManager = true;
+				}
+				else
+				{
+					System.out.println("Invalid option. Please try again. ");
+				}			    			
+			}
 		}
-		
-		
+
+
 		else
 		{
 			System.out.println("\nError\n-Existing employees not found.\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
 		}
-		
+
 
 	}
 
+	/**
+   * return a String listing all the employees
+   * @return A string version of the employees ArrayList
+   */
 	public String listAll() 
 	{
 		String list = "";
@@ -420,6 +477,10 @@ public class Driver
 		return list;
 	}	
 	
+	/**
+	 * return a String listing all the employees
+	 * @return A String of employees of type Manager in employees ArrayList
+	 */
 	public String listManagers() 
 		{
 			String list = "";
@@ -442,6 +503,11 @@ public class Driver
 		return list;
 		}
 
+	/**
+	 * Presents the user with the salary menu of the system
+	 * and returns their selection.
+	 * @return The user's menu selection
+	 */
 	public int salaryMenu()
 	{
 		int option = 0;
@@ -474,6 +540,11 @@ public class Driver
 		return option;	
 	}
 	
+	/**
+	 * Handles the user's selection from the salary menu 
+	 * by calling methods corresponding to the user's
+	 * selection.
+	 */
 	public void salaryRun()
 	{
 		if (!employees.isEmpty())
@@ -527,6 +598,12 @@ public class Driver
 		
 	}
 	
+	/**
+	 * return a String listing all the employees' details 
+	 * including their individual salary. Total salary is listed 
+	 * at the bottom
+	 * @return A String of employees including their salary
+	 */
 	public String allSalary()
 	{
 		String salary = "";
@@ -553,11 +630,11 @@ public class Driver
 		{
 			salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
 			totalSalary += employee.calculateSalary(numHours);
-			if (employee instanceof Manager)
+			if (employee instanceof Manager) //Add manager bonus if of type Manager
 			{
 				salary += "\nManager bonus: " + ((Manager) employee).getBonus();
 			}
-			else if (employee instanceof SalesWorker)
+			else if (employee instanceof SalesWorker) //Add sales performance bonus if of type SalesWorker
 			{
 				salary += "\nSales bonus percentage: " + ((SalesWorker) employee).getBonus();
 			}
@@ -569,6 +646,11 @@ public class Driver
 		return salary;
 	}
 	
+	/**
+	 * return a String listing only employees of type Manager's
+	 * details, individual salary and total salary
+	 * @return A String of employees of type Manager including their salary
+	 */
 	public String managerSalary()
 	{
 		String salary = "";
@@ -609,6 +691,11 @@ public class Driver
 		
 	}
 	
+	/**
+	 * return a String listing only employees of type SalesWorker's
+	 * details, individual salary and total salary
+	 * @return A String of employees of type SalesWorker including their salary
+	 */
 	public String salesSalary()
 	{
 		String salary = "";
@@ -648,6 +735,11 @@ public class Driver
 		return salary;	
 	}
 	
+	/**
+	 * return a String listing only employees of type TempWorker's
+	 * details, individual salary and total salary
+	 * @return A String of employees of type TempWorker including their salary
+	 */
 	public String tempSalary()
 	{
 		String salary = "";
@@ -687,6 +779,11 @@ public class Driver
 		
 	}
 	
+	/**
+	 * return a String listing an individual employee's
+	 * details and salary
+	 * @return A String of individual employee details including their salary
+	 */
 	public String individualSalary()
 	{
 		System.out.println(listAll());
@@ -753,6 +850,10 @@ public class Driver
 		return salary;
 	}
 	
+	/**
+	 * return a String with a summary of total salaries of each Employee subclass
+	 * @return A String of total salaries of employees and each subclass
+	 */
 	public String summarySalary()
 	{
 		String salary = "";
@@ -804,9 +905,12 @@ public class Driver
 		return salary;
 	}
 
+	/**
+	 * Allows user to select and edit an existing employee's details
+	 */
 	public void editDetails()
 	{
-		if (!employees.isEmpty())
+		if (!employees.isEmpty()) //Checks if there are existing employees
 		{
 			System.out.println(listAll());
 			int selectedEmployee = 0;
@@ -864,7 +968,7 @@ public class Driver
 				}
 			}
 			
-			if (employee.getClass().equals(Manager.class))
+			if (employee.getClass().equals(Manager.class)) //Present field to edit manager bonus is of type Manager
 			{
 				double bonus = 0.0;
 			  errorFree = false;
@@ -886,7 +990,7 @@ public class Driver
 				Manager man = (Manager) employees.get(selectedEmployee);
 				man.setBonus(bonus);
 			}
-			else if (employee.getClass().equals(SalesWorker.class))
+			else if (employee.getClass().equals(SalesWorker.class)) //Present field to edit sales performance bonus is of type SalesWorker
 			{
 				double bonus = 0.0;
 			  errorFree = false;
