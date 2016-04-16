@@ -410,10 +410,11 @@ public class Driver
 			{
 				System.out.println("\n============= SALARY MENU =============\n");
 				System.out.println("1)	Salary of all employees");
-				System.out.println("2)	Salary of all Managers");
-				System.out.println("3)	Salary of all Sales Workers");
-				System.out.println("4)	Salary of all Temporary Workers");
+				System.out.println("2)	Salary of only Managers");
+				System.out.println("3)	Salary of only Sales Workers");
+				System.out.println("4)	Salary of only Temporary Workers");
 				System.out.println("5)	Salary of individual employee");
+				System.out.println("6)	Salary summary");
 				System.out.println("\n0)	Back to main menu");
 				option = input.nextInt();
 				errorFree = true;
@@ -446,15 +447,30 @@ public class Driver
 					option = 0;
 					break;
 
-//				case 2:
-//					addSalesWorker();
-//					option = 0;
-//					break;	
-//					
-//				case 3:
-//					addTempWorker();
-//					option = 0;
-//					break;
+				case 2:
+					System.out.println(managerSalary());
+					option = 0;
+					break;	
+					
+				case 3:
+					System.out.println(salesSalary());
+					option = 0;
+					break;
+					
+				case 4:
+					System.out.println(tempSalary());
+					option = 0;
+					break;
+					
+				case 5:
+					System.out.println(individualSalary());
+					option = 0;
+					break;
+					
+				case 6:
+					System.out.println(summarySalary());
+					option = 0;
+					break;
 
 				default:
 					System.out.println("Invalid option. Please try again.\n");
@@ -472,6 +488,7 @@ public class Driver
 	public String allSalary()
 	{
 		String salary = "";
+		double totalSalary = 0.0;
 		int i = 0;
 		double numHours = 0.0;
 		boolean errorFree = false;
@@ -493,7 +510,7 @@ public class Driver
 		for(Employee employee: employees)
 		{
 			salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
-			
+			totalSalary += employee.calculateSalary(numHours);
 			if (employee instanceof Manager)
 			{
 				salary += "\nManager bonus: " + ((Manager) employee).getBonus();
@@ -506,7 +523,242 @@ public class Driver
 			salary += "\n===============================";
 			i++;
 		}
+		salary += "\nTOTAL SALARY: " + totalSalary;
 		return salary;
 	}
 	
+	public String managerSalary()
+	{
+		String salary = "";
+		double totalSalary = 0.0;
+		int i = 0;
+		double numHours = 0.0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		salary += "\n============= SALARY OF ALL MANAGERS =============\n";
+		for(Employee employee: employees)
+		{
+			if (employee instanceof Manager)
+			{
+				salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
+				salary += "\nManager bonus: " + ((Manager) employee).getBonus();
+				salary += "\n\nSalary: " + employee.calculateSalary(numHours);	
+				salary += "\n===============================";
+				totalSalary += employee.calculateSalary(numHours);
+			}
+			
+			i++;
+		}
+		salary += "\nTOTAL SALARY: " + totalSalary;
+		return salary;
+		
+	}
+	
+	public String salesSalary()
+	{
+		String salary = "";
+		double totalSalary = 0.0;
+		int i = 0;
+		double numHours = 0.0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		salary += "\n============= SALARY OF ALL SALES WORKERS =============\n";
+		for(Employee employee: employees)
+		{
+			if (employee instanceof SalesWorker)
+			{
+				salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
+				salary += "\nSales bonus percentage: " + ((SalesWorker) employee).getBonus();
+				salary += "\n\nSalary: " + employee.calculateSalary(numHours);	
+				salary += "\n===============================";
+				totalSalary += employee.calculateSalary(numHours);
+			}
+			
+			i++;
+		}
+		salary += "\nTOTAL SALARY: " + totalSalary;
+		return salary;	
+	}
+	
+	public String tempSalary()
+	{
+		String salary = "";
+		double totalSalary = 0.0;
+		int i = 0;
+		double numHours = 0.0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		salary += "\n============= SALARY OF ALL TEMPORARY WORKERS =============\n";
+		for(Employee employee: employees)
+		{
+			if ((!(employee instanceof Manager)) && (!(employee instanceof SalesWorker)))
+			{
+				salary += "\n===============================\nWorker ID: " + (i+1) + employee.toString();
+				salary += "\n\nSalary: " + employee.calculateSalary(numHours);	
+				salary += "\n===============================";
+				totalSalary += employee.calculateSalary(numHours);
+			}
+			
+			i++;
+		}
+		salary += "\nTOTAL SALARY: " + totalSalary;
+		return salary;
+		
+	}
+	
+	public String individualSalary()
+	{
+		System.out.println(listAll());
+		int selectedEmployee = 0;
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+    		System.out.println("Please select employee (Employee ID): ");
+    		selectedEmployee = input.nextInt() - 1;
+    		if (selectedEmployee < employees.size())
+    		{			
+    			errorFree = true;
+    		}	
+    		else
+    		{
+    			System.out.println("Invalid option. Please try again. ");
+    		}
+			}	
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+			
+		}
+		
+		Employee employee = employees.get(selectedEmployee);
+		String salary = "";
+		int i = 0;
+		double numHours = 0.0;
+		
+		errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		
+		salary += "\n============= SALARY OF " + employee.getFirstName() + " =============\n";
+		salary += "\n===============================\nWorker ID: " + (selectedEmployee+1) + employee.toString();
+			
+		if (employee instanceof Manager)
+		{
+			salary += "\nManager bonus: " + ((Manager) employee).getBonus();
+		}
+		else if (employee instanceof SalesWorker)
+		{
+			salary += "\nSales bonus percentage: " + ((SalesWorker) employee).getBonus();
+		}
+		salary += "\n\nSalary: " + employee.calculateSalary(numHours);	
+		salary += "\n===============================";
+		
+		return salary;
+	}
+	
+	public String summarySalary()
+	{
+		String salary = "";
+		double numHours = 0.0;
+		double managerSalary = 0.0;
+		double salesSalary = 0.0;
+		double tempSalary = 0.0;
+		double totalSalary = 0.0;
+		
+		boolean errorFree = false;
+		while (!errorFree)
+		{
+			try
+			{
+				System.out.println("Enter number of hours worked: \n");
+				numHours = input.nextDouble();
+				errorFree = true;
+			}
+			catch (Exception e)
+			{
+				input.nextLine();
+				System.out.println("\nOnly numeric values accepted. Please try again.\n");
+			}
+		}
+		
+		salary += "\n============= SALARY SUMMARY =============\n";
+		for(Employee employee: employees)
+		{
+			totalSalary += employee.calculateSalary(numHours);	
+			if (employee instanceof Manager)
+			{
+				managerSalary += employee.calculateSalary(numHours);
+			}
+			else if (employee instanceof SalesWorker)
+			{
+				salesSalary += employee.calculateSalary(numHours);
+			}
+			else
+			{
+				tempSalary += employee.calculateSalary(numHours);
+			}
+			
+		}
+		salary += "\nTOTAL MANAGER SALARY: " + managerSalary;
+		salary += "\nTOTAL SALES WORKER SALARY: " + salesSalary;
+		salary += "\nTOTAL TEMPORARY WORKER SALARY: " + tempSalary;
+		salary += "\n\nTOTAL SALARY: " + totalSalary;
+
+		return salary;
+	}
 }
