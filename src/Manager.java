@@ -45,7 +45,7 @@ public class Manager extends Employee
 
 		for (int i=0; i<department.size(); i++)
 		{
-			str += "\n				- " + department.get(i).getFirstName() + " " + department.get(i).getSecondName();		
+			str += "\n		- " + department.get(i).getFirstName() + " " + department.get(i).getSecondName();		
 		}
 		return str;
 	}

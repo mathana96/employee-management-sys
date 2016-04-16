@@ -292,7 +292,7 @@ public class Driver
     		{
     			try
     			{
-        		System.out.println("Please select employee to be assigned (Employee ID): ");
+        		System.out.println("Please select employee (Either Sales Worker or Temp Employee) to be assigned (Employee ID): ");
         		selectedEmployee = input.nextInt() - 1;
         		if (selectedEmployee < employees.size())
         		{
@@ -320,13 +320,15 @@ public class Driver
     		}		
     		Employee employee = employees.get(selectedEmployee);
     		
-    		errorFree = false;
+    	
     		boolean isManager = false;
     		
     		while (!isManager)
-    		{
+    		{		
+    			errorFree = false;
     			while (!errorFree)
     			{
+    							
     				try
     				{
         			input.nextLine();
@@ -347,29 +349,53 @@ public class Driver
     				{
     					System.out.println("\nOnly numeric values accepted. Please try again.\n");
     				}
-    			}	
-    			Employee emp = employees.get(selectedManager);
+    				   				
+    			}
     			
-    			if (emp.getClass().equals(Manager.class))
+    			Employee manager = employees.get(selectedManager);
+    			
+    			if (manager.getClass().equals(Manager.class))
     			{
     				Manager man = (Manager) employees.get(selectedManager);
     				
-    				man.addDeptEmployee(employee);
+    				
+    				int added = 0;
+    				for (Employee staff: man.getDept())
+    				{
+    					if ((employee.getFirstName() == staff.getFirstName()) && (employee.getSecondName() == staff.getSecondName()))
+    					{
+    						added++;
+    					}					
+    				}
+    				
+    				if (added == 0)
+    				{
+    					man.addDeptEmployee(employee);
+    					System.out.println("\nEmployee successfully added to department\n");
+    				}
+    				else
+    				{
+    					input.nextLine();
+    					System.out.println("Employee already added to department. Please try again. ");
+    				}
     				isManager = true;
-
-
     			}
     			else
     			{
+//    				input.nextLine();
     				System.out.println("Invalid option. Please try again. ");
-    				errorFree = false;
     			}
+    			    			
     		}
 		}
+		
+		
 		else
 		{
-			System.out.println("\nError. Either;\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
+			System.out.println("\nError\n-Existing employees not found.\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
 		}
+		
+
 	}
 
 	public String listAll() 
@@ -818,7 +844,7 @@ public class Driver
 
 			System.out.println("Second Name: ");
 			String secondName = input.nextLine();
-		  employee.setSecondName(firstName);
+		  employee.setSecondName(secondName);
 
 			double hourlyRate = 0.0;
 			errorFree = false;
@@ -883,13 +909,13 @@ public class Driver
 			  SalesWorker sales = (SalesWorker) employees.get(selectedEmployee);
 				sales.setBonus(bonus);
 			}
+			System.out.println("\nSystem updated");
 		}
 		else
 		{
 			System.out.println("\nNo employees found\n");
 		}
 		
-		System.out.println("\nSystem updated");
 	}	
 
 }
