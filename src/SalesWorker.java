@@ -22,7 +22,7 @@ public class SalesWorker extends Employee
 		return salesBonus;
 	}
 
-	public void setBonus(int newBonus)
+	public void setBonus(double newBonus)
 	{
 		if (newBonus >= 0 && newBonus <= 20)
 		{

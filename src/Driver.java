@@ -34,6 +34,7 @@ public class Driver
 				System.out.println("2)	List employees");
 				System.out.println("3)	Assign employee to a department");
 				System.out.println("4)	Calculate salary");
+				System.out.println("5)	Edit employee details");
 				System.out.println("\n0)	Exit system");
 				option = input.nextInt();
 				errorFree = true;
@@ -45,7 +46,7 @@ public class Driver
 				System.out.println("\nOnly numeric values accepted. Please try again.\n");
 			}
 			
-		}
+		} 
 		
 		System.out.println(option);
 		return option;
@@ -73,6 +74,10 @@ public class Driver
 
 			case 4:
 				salaryRun();
+				break;
+				
+			case 5:
+				editDetails();
 				break;
 
 			default:
@@ -761,4 +766,119 @@ public class Driver
 
 		return salary;
 	}
+
+	public void editDetails()
+	{
+		if (!employees.isEmpty())
+		{
+			System.out.println(listAll());
+			int selectedEmployee = 0;
+			boolean errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+					System.out.println("Please select employee (Employee ID): ");
+					selectedEmployee = input.nextInt() - 1;
+					if (selectedEmployee < employees.size())
+					{
+						errorFree = true;
+					}	
+					else
+					{
+						System.out.println("Invalid option. Please try again. ");
+					}
+				}	
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
+
+			}		
+			Employee employee = employees.get(selectedEmployee);
+			
+			System.out.println("Update the following fields:\n");
+			
+			input.nextLine();
+			System.out.println("First Name: ");
+			String firstName = input.nextLine();
+		  employee.setFirstName(firstName);
+
+			System.out.println("Second Name: ");
+			String secondName = input.nextLine();
+		  employee.setSecondName(firstName);
+
+			double hourlyRate = 0.0;
+			errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+	    		System.out.println("Hourly rate: ");
+	    		hourlyRate = input.nextDouble();
+	  		  employee.setHourlyRate(hourlyRate);
+	    		errorFree = true;
+				}
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
+			}
+			
+			if (employee.getClass().equals(Manager.class))
+			{
+				double bonus = 0.0;
+			  errorFree = false;
+			  while (!errorFree)
+				{
+					try
+					{
+		    		System.out.println("Manager bonus: ");
+		    		bonus = input.nextDouble();
+		    		errorFree = true;
+
+					}
+					catch (Exception e)
+					{
+						input.nextLine();
+						System.out.println("\nOnly numeric values accepted. Please try again.\n");
+					}
+				}
+				Manager man = (Manager) employees.get(selectedEmployee);
+				man.setBonus(bonus);
+			}
+			else if (employee.getClass().equals(SalesWorker.class))
+			{
+				double bonus = 0.0;
+			  errorFree = false;
+			  while (!errorFree)
+				{
+					try
+					{
+		    		System.out.println("Sales bonus percentage (only values between 0 and 20): ");
+		    		bonus = input.nextDouble();
+		    		errorFree = true;
+
+					}
+					catch (Exception e)
+					{
+						input.nextLine();
+						System.out.println("\nOnly numeric values accepted. Please try again.\n");
+					}
+				} 
+			  
+			  SalesWorker sales = (SalesWorker) employees.get(selectedEmployee);
+				sales.setBonus(bonus);
+			}
+		}
+		else
+		{
+			System.out.println("\nNo employees found\n");
+		}
+		
+		System.out.println("\nSystem updated");
+	}	
+
 }

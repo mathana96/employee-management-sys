@@ -43,7 +43,7 @@ public abstract class Employee
 	{
 		return hourlyRate;
 	}
-	public void setHourlyRate(int newRate)
+	public void setHourlyRate(double newRate)
 	{
 		if (newRate >= 0)
 		{

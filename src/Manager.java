@@ -25,7 +25,7 @@ public class Manager extends Employee
 		return managerBonus;
 	}
 
-	public void setBonus(int newBonus)
+	public void setBonus(double newBonus)
 	{
 		if (newBonus >= 0)
 		{
