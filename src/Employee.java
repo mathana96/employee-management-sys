@@ -23,7 +23,7 @@ public abstract class Employee
 	 */
 	public Employee(String firstName, String secondName, double hourlyRate)
 	{
-		this.firstName = firstName;
+		this.firstName = firstName; 
 		this.secondName = secondName;
 		if (hourlyRate >=0) //Validation for hourly rate
 		{

@@ -37,7 +37,15 @@ public class SalesWorker extends Employee
 	 */
 	public double calculateSalary(double numHours)
 	{
-  	return super.calculateSalary(numHours) + calculateBonus(numHours);
+		if (numHours > 0)
+		{
+			return super.calculateSalary(numHours) + calculateBonus(numHours);
+		}
+		else
+		{
+			return 0.0;
+		}
+  	
 	}
 	
 	/**

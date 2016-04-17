@@ -208,7 +208,7 @@ public class Driver
 					System.out.println("Please select employee you want to remove (Employee ID): ");
 					selectedEmployee = input.nextInt() - 1;
 					
-					if (selectedEmployee < employees.size()) //Avoid outofboundsexception
+					if (selectedEmployee < employees.size() && selectedEmployee >= 0) //Avoid outofboundsexception
 					{
 						errorFree = true;		
 					}	
@@ -268,10 +268,10 @@ public class Driver
 	
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine();
+		String firstName = input.nextLine().substring(0,15);
 		
 		System.out.println("Second name: ");
-		String secondName = input.nextLine();
+		String secondName = input.nextLine().substring(0,15);
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -319,10 +319,10 @@ public class Driver
 	{
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine();
+		String firstName = input.nextLine().substring(0,15);
 
 		System.out.println("Second name: ");
-		String secondName = input.nextLine();
+		String secondName = input.nextLine().substring(0,15);
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -370,10 +370,10 @@ public class Driver
 	{
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine();
+		String firstName = input.nextLine().substring(0,15);
 
 		System.out.println("Second name: ");
-		String secondName = input.nextLine();
+		String secondName = input.nextLine().substring(0,15);
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -426,7 +426,7 @@ public class Driver
 				{
 					System.out.println("Please select employee (Either Sales Worker or Temp Employee) to be assigned (Employee ID): ");
 					selectedEmployee = input.nextInt() - 1;
-					if (selectedEmployee < employees.size())
+					if (selectedEmployee < employees.size() && selectedEmployee >= 0)
 					{
 
 						if (employees.get(selectedEmployee).getClass().equals(Manager.class))
@@ -465,7 +465,7 @@ public class Driver
 						System.out.println("Please select the manager whose department you wish to assign the employee to: ");
 						selectedManager = input.nextInt() - 1;
 						//Catches Outofboundsexception
-						if (selectedManager < employees.size())
+						if (selectedManager < employees.size() && selectedEmployee >= 0)
 						{
 							if (employees.get(selectedManager).getClass().equals(Manager.class))
 							{
@@ -543,7 +543,7 @@ public class Driver
 		}
 
 		//Execute if the total number of employees are more than the number of Managers
-		if (employees.size() > present)
+		if (employees.size() > present && present > 0)
 		{			
 			System.out.println(listManagers());
 			int selectedManager = 0;
@@ -554,7 +554,7 @@ public class Driver
 				{
 					System.out.println("Please select which department (Manager) the employee is in: ");
 					selectedManager = input.nextInt() - 1;
-					if (selectedManager < employees.size())
+					if (selectedManager < employees.size() && selectedManager >= 0)
 					{
 						if (employees.get(selectedManager).getClass().equals(Manager.class))
 						{
@@ -614,7 +614,12 @@ public class Driver
 			man.getDept().remove(selectedEmployee);
 			System.out.println("\nEmployee successfully removed.\n");			
 
-		}	
+		}
+		else
+		{
+			System.out.println("\nNo employees found.\n");			
+
+		}
 
 	}
 	/**
@@ -976,7 +981,6 @@ public class Driver
 		
 		Employee employee = employees.get(selectedEmployee);
 		String salary = "";
-		int i = 0;
 		double numHours = 0.0;
 		
 		errorFree = false;
@@ -1083,7 +1087,7 @@ public class Driver
 				{
 					System.out.println("Please select employee (Employee ID): ");
 					selectedEmployee = input.nextInt() - 1;
-					if (selectedEmployee < employees.size())
+					if (selectedEmployee < employees.size() && selectedEmployee >= 0)
 					{
 						errorFree = true;
 					}	
@@ -1105,11 +1109,11 @@ public class Driver
 			
 			input.nextLine();
 			System.out.println("First Name: ");
-			String firstName = input.nextLine();
+			String firstName = input.nextLine().substring(0,15);
 		  employee.setFirstName(firstName);
 
 			System.out.println("Second Name: ");
-			String secondName = input.nextLine();
+			String secondName = input.nextLine().substring(0,15);
 		  employee.setSecondName(secondName);
 
 			double hourlyRate = 0.0;

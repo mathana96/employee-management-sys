@@ -69,7 +69,15 @@ public class Manager extends Employee
 	 */
   public double calculateSalary(double numHours)
 	{
-  	return super.calculateSalary(numHours) + this.managerBonus;
+  	if (numHours > 0)
+  	{
+  		return super.calculateSalary(numHours) + this.managerBonus;
+  	}
+  	else
+  	{
+  		return 0.0;
+  	}
+  	
 	}
   
   /**
