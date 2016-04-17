@@ -54,10 +54,12 @@ public class Manager extends Employee
 	public String employeesInDept()
 	{
 		String str = "";
-
+		
+		int staff = 0;
 		for (int i=0; i<department.size(); i++)
 		{
-			str += "\n		- " + department.get(i).getFirstName() + " " + department.get(i).getSecondName();		
+			str += "\n		- " + "Department ID: " + "[" + (staff+1) + "] " + department.get(i).getFirstName() + " " + department.get(i).getSecondName();		
+			staff++;
 		}
 		return str;
 	}

@@ -51,10 +51,12 @@ public class Driver
 			{
 				System.out.println("\n============= MAIN MENU =============\n");
 				System.out.println("1)	Add an employee");
-				System.out.println("2)	List employees");
-				System.out.println("3)	Assign employee to a department");
-				System.out.println("4)	Calculate salary");
-				System.out.println("5)	Edit employee details");
+				System.out.println("2)	Remove an employee");
+				System.out.println("3)	List employees");
+				System.out.println("4)	Assign employee to a department");
+				System.out.println("5)	Remove employee from a department");
+				System.out.println("6)	Calculate salary");
+				System.out.println("7)	Edit employee details");
 				System.out.println("\n0)	Exit system");
 				option = input.nextInt();
 				errorFree = true;
@@ -88,20 +90,28 @@ public class Driver
 			case 1:
 				workerRun();
 				break;
-
+				
 			case 2:
+				workerRemoveRun();
+				break;
+
+			case 3:
 				System.out.println(listAll());
 				break;
 				
-			case 3:
-				addToDept();
-				break;
-
 			case 4:
-				salaryRun();
+				addToDept();
 				break;
 				
 			case 5:
+				removeDept();
+				break;
+
+			case 6:
+				salaryRun();
+				break;
+				
+			case 7:
 				editDetails();
 				break;
 
@@ -177,6 +187,76 @@ public class Driver
 				System.out.println("Invalid option. Please try again.\n");
 				option = workerMenu();
 			}		
+		}
+	}
+	
+	/**
+	 * Removes an employee from the ArrayList employees and from any department they belong to
+	 */
+	public void workerRemoveRun()
+	{
+		if (employees.size() > 0)
+		{
+			//Lists all the employees 
+			System.out.println(listAll());
+			int selectedEmployee = 0;
+			boolean errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+					System.out.println("Please select employee you want to remove (Employee ID): ");
+					selectedEmployee = input.nextInt() - 1;
+					
+					if (selectedEmployee < employees.size()) //Avoid outofboundsexception
+					{
+						errorFree = true;		
+					}	
+					else
+					{
+						System.out.println("Invalid option. Please try again. ");
+					}
+				}	
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
+
+			}		
+			//Create an object of the selected employee from the ArrayList
+		  
+		  
+		  Employee fired = employees.get(selectedEmployee);
+		  
+		  for (Employee manager: employees)
+		  {
+		  	if (manager instanceof Manager)
+		  	{
+		  		int staffNum = 0;
+		  		int toBeFired = 0;
+		  		
+		  		Manager man = (Manager) manager;
+		  		for (Employee staff: man.getDept())
+		  		{	  			
+		  			if (staff.getFirstName() == fired.getFirstName() && staff.getSecondName() == fired.getSecondName())
+		  			{
+		  				toBeFired = staffNum;
+		  			}	
+	  				staffNum++;
+		  		}
+		  		man.getDept().remove(toBeFired);
+		  	}
+		  	
+		  }
+		  
+		  employees.remove(selectedEmployee);
+		  System.out.println("\nEmployee sucessfuly removed.\n");
+			
+		}
+		else
+		{
+			System.out.println("\nNo employees found.\n");
 		}
 	}
 
@@ -333,7 +413,7 @@ public class Driver
 		}
 		
 		//Execute if the total number of employees are more than the number of Managers
-		if (employees.size() > present)
+		if ((employees.size() > present) && (present > 0))
 		{
 			//Lists all the employees 
 			System.out.println(listAll());
@@ -372,12 +452,7 @@ public class Driver
 			}		
 			//Create an object of the selected employee from the ArrayList
 			Employee employee = employees.get(selectedEmployee);
-
-
-			boolean isManager = false;
-
-			while (!isManager)
-			{		
+	
 				errorFree = false;
 				while (!errorFree)
 				{
@@ -392,7 +467,15 @@ public class Driver
 						//Catches Outofboundsexception
 						if (selectedManager < employees.size())
 						{
-							errorFree = true;
+							if (employees.get(selectedManager).getClass().equals(Manager.class))
+							{
+								errorFree = true;
+							}
+							else
+							{
+								System.out.println("Invalid option. Please try again. ");
+							}
+							
 						}	
 						else
 						{
@@ -406,23 +489,25 @@ public class Driver
 
 				}
 				
-				//Creates an object of the selected Manager
-				Employee manager = employees.get(selectedManager);
-				
-				//Checks if the selected employee is indeed of type Manager
-				if (manager.getClass().equals(Manager.class))
-				{
-					Manager man = (Manager) employees.get(selectedManager);
-					//Checks if the employee selected initially is present in the selected Manager's department
+				Manager man = (Manager) employees.get(selectedManager);
+					//Checks if the employee has already been assigned a department
 					int added = 0;
-					for (Employee staff: man.getDept())
+					for (Employee aManager: employees)
 					{
-						if ((employee.getFirstName() == staff.getFirstName()) && (employee.getSecondName() == staff.getSecondName()))
+						if (aManager instanceof Manager)
 						{
-							added++;
-						}					
+							Manager chosen = (Manager) aManager;
+							
+							for (Employee inChosenDepartment: chosen.getDept())
+							{
+								if ((employee.getFirstName() == inChosenDepartment.getFirstName()) && (employee.getSecondName() == inChosenDepartment.getSecondName()))
+								{
+									added++;
+								}
+							}
+						}
 					}
-					//Execute if employee is not in the manager's department
+					//Execute if employee is not in any department
 					if (added == 0)
 					{
 						man.addDeptEmployee(employee);
@@ -431,26 +516,107 @@ public class Driver
 					else
 					{
 						input.nextLine();
-						System.out.println("Employee already added to department. Please try again. ");
+						System.out.println("Employee already added to a department. Please try again. ");
 					}
-					isManager = true;
+
 				}
 				else
 				{
-					System.out.println("Invalid option. Please try again. ");
+					System.out.println("\nError\n-Existing employees not found.\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
 				}			    			
+			}
+
+
+	/**
+	 * Removes an employee from a department
+	 */
+	public void removeDept()
+	{
+		int present = 0;
+		//Check if employee of type Manager is present in the employees ArrayList
+		for (Employee employee: employees)
+		{
+			if ((employee instanceof Manager))
+			{
+				present++;
 			}
 		}
 
+		//Execute if the total number of employees are more than the number of Managers
+		if (employees.size() > present)
+		{			
+			System.out.println(listManagers());
+			int selectedManager = 0;
+			boolean errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+					System.out.println("Please select which department (Manager) the employee is in: ");
+					selectedManager = input.nextInt() - 1;
+					if (selectedManager < employees.size())
+					{
+						if (employees.get(selectedManager).getClass().equals(Manager.class))
+						{
+							errorFree = true;		
+						}
+						else
+						{
+							System.out.println("Invalid option. Please try again. ");
+						}
+					}	
+					else
+					{
+						System.out.println("Invalid option. Please try again. ");
+					}
+				}	
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
 
-		else
-		{
-			System.out.println("\nError\n-Existing employees not found.\n-Existing managers not found. At least 1 manager required to add employee to department\n-Cannot create department with only Manager(s)");
-		}
+			}
 
+			Manager man = (Manager) employees.get(selectedManager);
+			int i = 0;
+			for (Employee staff: man.getDept())
+			{
+				System.out.println("Department ID: " + "[" + (i+1) + "] " + staff.getFirstName() + " " + staff.getSecondName());
+				i++;
+			}
+
+			int selectedEmployee = 0;
+			errorFree = false;
+			while (!errorFree)
+			{
+				try
+				{
+					System.out.println("Please select employee (Employee ID) to be removed: ");
+					selectedEmployee = input.nextInt() - 1;
+					if (selectedEmployee < man.numberInDept())
+					{
+						errorFree = true;								
+					}	
+					else
+					{
+						System.out.println("Invalid option. Please try again. ");
+					}
+				}	
+				catch (Exception e)
+				{
+					input.nextLine();
+					System.out.println("\nOnly numeric values accepted. Please try again.\n");
+				}
+
+			}
+
+			man.getDept().remove(selectedEmployee);
+			System.out.println("\nEmployee successfully removed.\n");			
+
+		}	
 
 	}
-
 	/**
    * return a String listing all the employees
    * @return A string version of the employees ArrayList
@@ -492,11 +658,7 @@ public class Driver
 				if (employee.getClass().equals(Manager.class))
 				{
 					
-					list += "\n===============================\nWorker ID: " + (i+1) + 
-							    "\nPosition: Manager" + 
-							    "\n" + "First name: " + employee.getFirstName() + 
-							    "\nSecond name: " + employee.getSecondName() +
-							    "\n===============================\n"; 	
+					list += "\n===============================\nWorker ID: " + (i+1) + employee.toString() + "\n===============================\n"; 
 				}
 				i++;
 			}	
