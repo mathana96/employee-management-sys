@@ -268,10 +268,10 @@ public class Driver
 	
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine().substring(0,15);
+		String firstName = input.nextLine();
 		
 		System.out.println("Second name: ");
-		String secondName = input.nextLine().substring(0,15);
+		String secondName = input.nextLine();
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -319,10 +319,10 @@ public class Driver
 	{
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine().substring(0,15);
+		String firstName = input.nextLine();
 
 		System.out.println("Second name: ");
-		String secondName = input.nextLine().substring(0,15);
+		String secondName = input.nextLine();
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -370,10 +370,10 @@ public class Driver
 	{
 		input.nextLine();
 		System.out.println("First name: ");
-		String firstName = input.nextLine().substring(0,15);
+		String firstName = input.nextLine();
 
 		System.out.println("Second name: ");
-		String secondName = input.nextLine().substring(0,15);
+		String secondName = input.nextLine();
 
 		double hourlyRate = 0.0;
 		boolean errorFree = false;
@@ -1109,11 +1109,11 @@ public class Driver
 			
 			input.nextLine();
 			System.out.println("First Name: ");
-			String firstName = input.nextLine().substring(0,15);
+			String firstName = input.nextLine();
 		  employee.setFirstName(firstName);
 
 			System.out.println("Second Name: ");
-			String secondName = input.nextLine().substring(0,15);
+			String secondName = input.nextLine();
 		  employee.setSecondName(secondName);
 
 			double hourlyRate = 0.0;
