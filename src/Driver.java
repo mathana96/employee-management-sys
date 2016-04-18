@@ -534,16 +534,28 @@ public class Driver
 	{
 		int present = 0;
 		//Check if employee of type Manager is present in the employees ArrayList
-		for (Employee employee: employees)
-		{
-			if ((employee instanceof Manager))
-			{
-				present++;
-			}
-		}
+		
+		 for (Employee employee: employees)
+		  {
+		  	if (employee instanceof Manager)
+		  	{
+		  		Manager man = (Manager) employee;
+		  		if (man.getDept().size() != 0)
+		  		{
+		  			present++;
+		  		}	  		
+		  	}  	
+		  }
+//		for (Employee employee: employees)
+//		{
+//			if ((employee instanceof Manager))
+//			{
+//				present++;
+//			}
+//		}
 
 		//Execute if the total number of employees are more than the number of Managers
-		if (employees.size() > present && present > 0)
+		if (present > 0)
 		{			
 			System.out.println(listManagers());
 			int selectedManager = 0;
@@ -594,7 +606,7 @@ public class Driver
 				{
 					System.out.println("Please select employee (Employee ID) to be removed: ");
 					selectedEmployee = input.nextInt() - 1;
-					if (selectedEmployee < man.numberInDept())
+					if (selectedEmployee < man.numberInDept() && selectedEmployee >= 0)
 					{
 						errorFree = true;								
 					}	
@@ -617,7 +629,7 @@ public class Driver
 		}
 		else
 		{
-			System.out.println("\nNo employees found.\n");			
+			System.out.println("\nNo employees in a department found.\n");			
 
 		}
 
@@ -962,7 +974,7 @@ public class Driver
 			{
     		System.out.println("Please select employee (Employee ID): ");
     		selectedEmployee = input.nextInt() - 1;
-    		if (selectedEmployee < employees.size())
+    		if (selectedEmployee < employees.size() && selectedEmployee >= 0)
     		{			
     			errorFree = true;
     		}	
