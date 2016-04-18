@@ -101,11 +101,11 @@ public abstract class Employee
 	 */
 	public String getFirstName()
 	{
-		return firstName.substring(0,15);
+		return firstName;
 	}
 	public String getSecondName()
 	{
-		return secondName.substring(0,15);
+		return secondName;
 	}
 	public void setFirstName(String firstName)
 	{

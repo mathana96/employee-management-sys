@@ -229,6 +229,7 @@ public class Driver
 		  
 		  Employee fired = employees.get(selectedEmployee);
 		  
+		  //If employee to be fired is in a department, remove the employee from department
 		  for (Employee manager: employees)
 		  {
 		  	if (manager instanceof Manager)
@@ -245,7 +246,12 @@ public class Driver
 		  			}	
 	  				staffNum++;
 		  		}
-		  		man.getDept().remove(toBeFired);
+		  		//Only execute if there is anybody in any department
+		  		if (staffNum > 0)
+		  		{
+		  			man.getDept().remove(toBeFired);
+		  		}
+		  		
 		  	}
 		  	
 		  }
