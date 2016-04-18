@@ -412,7 +412,7 @@ public class Driver
 			}
 		}
 		
-		//Execute if the total number of employees are more than the number of Managers
+		//Execute if the total number of employees are more than the number of Managers and there is at least 1 manager
 		if ((employees.size() > present) && (present > 0))
 		{
 			//Lists all the employees 
@@ -426,7 +426,7 @@ public class Driver
 				{
 					System.out.println("Please select employee (Either Sales Worker or Temp Employee) to be assigned (Employee ID): ");
 					selectedEmployee = input.nextInt() - 1;
-					if (selectedEmployee < employees.size() && selectedEmployee >= 0)
+					if (selectedEmployee < employees.size() && selectedEmployee >= 0) //Avoid outofbounds
 					{
 
 						if (employees.get(selectedEmployee).getClass().equals(Manager.class))
@@ -533,7 +533,7 @@ public class Driver
 	public void removeDept()
 	{
 		int present = 0;
-		//Check if employee of type Manager is present in the employees ArrayList
+		//Check if there are any employees assigned to any department
 		
 		 for (Employee employee: employees)
 		  {
@@ -546,15 +546,9 @@ public class Driver
 		  		}	  		
 		  	}  	
 		  }
-//		for (Employee employee: employees)
-//		{
-//			if ((employee instanceof Manager))
-//			{
-//				present++;
-//			}
-//		}
 
-		//Execute if the total number of employees are more than the number of Managers
+
+		//Execute if there is at least 1 employee in a department
 		if (present > 0)
 		{			
 			System.out.println(listManagers());
@@ -566,7 +560,7 @@ public class Driver
 				{
 					System.out.println("Please select which department (Manager) the employee is in: ");
 					selectedManager = input.nextInt() - 1;
-					if (selectedManager < employees.size() && selectedManager >= 0)
+					if (selectedManager < employees.size() && selectedManager >= 0) //Avoid outofbounds
 					{
 						if (employees.get(selectedManager).getClass().equals(Manager.class))
 						{
@@ -606,7 +600,7 @@ public class Driver
 				{
 					System.out.println("Please select employee (Employee ID) to be removed: ");
 					selectedEmployee = input.nextInt() - 1;
-					if (selectedEmployee < man.numberInDept() && selectedEmployee >= 0)
+					if (selectedEmployee < man.numberInDept() && selectedEmployee >= 0) //Avoid outofbounds
 					{
 						errorFree = true;								
 					}	
